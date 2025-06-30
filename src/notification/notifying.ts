@@ -4,7 +4,7 @@ import { Expo } from "expo-server-sdk";
 const expo = new Expo();
 
 const notifyingFxn = async (req: Request, res: Response) => {
-  const { pushTokens, title, body, data } = req.body;
+  const { pushTokens, title, body, data, sound } = req.body;
 
   if (!Array.isArray(pushTokens) || !title || !body) {
     res.status(400).json({ error: "Missing required fields" }).end();
@@ -21,7 +21,7 @@ const notifyingFxn = async (req: Request, res: Response) => {
 
     messages.push({
       to: pushToken,
-      sound: "default",
+      sound: sound || "default",
       title,
       body,
       data: data || {},
