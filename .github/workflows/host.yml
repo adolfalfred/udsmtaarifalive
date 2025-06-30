@@ -30,10 +30,10 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      # - name: Server Restart
-      #   run: |
-      #     npm install -g pm2
-      #     pm2 stop udsmtaarifalive || true
-      #     pm2 start udsmtaarifalive
-      #     pm2 save
-      #     sudo service nginx restart
+      - name: Server Restart
+        run: |
+          npm install -g pm2
+          pm2 stop udsmtaarifalive || true
+          pm2 start udsmtaarifalive
+          pm2 save
+          sudo service nginx restart
