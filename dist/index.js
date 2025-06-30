@@ -23,20 +23,17 @@ const server = http.createServer(app);
 server.listen(process.env.PORT_NO, () => {
     console.log(`Listening for requests at port ${process.env.PORT_NO}\nFor development mode go to http://localhost:${process.env.PORT_NO}/api`);
 });
-if (process.env.HOSTS) {
-    const hosts = process.env.HOSTS.split(",") ?? "*";
-    const io = new Server(server, {
-        cors: {
-            origin: hosts,
-            credentials: true,
-            methods: ["GET", "POST"],
-        },
-    });
-    io.on("connection", (socket) => RoomHandler(socket, io));
-    instrument(io, { auth: false });
-    app.use("/socket", express.static("./node_modules/@socket.io/admin-ui/ui/dist"));
-}
-app.get("/", (req, res) => {
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        credentials: true,
+        methods: ["GET", "POST"],
+    },
+});
+io.on("connection", (socket) => RoomHandler(socket, io));
+instrument(io, { auth: false });
+app.use("/socket", express.static("./node_modules/@socket.io/admin-ui/ui/dist"));
+app.get("/", (_req, res) => {
     res.status(200).json("API is healthy").end();
 });
 app.get("/api", (req, res) => {
