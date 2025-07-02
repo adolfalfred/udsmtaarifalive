@@ -1,5 +1,6 @@
+import createRoom from "./room/createRoom.js";
 const RoomHandler = async (socket, io) => {
-    // socket.on("create-room", (id) => createRoom(socket, id));
+    socket.on("create-room", (id) => createRoom(socket, id));
     // socket.on("join-room", (rest) => joinRoom({ ...rest, socket }));
     // socket.on("send-message", (rest) => addMessage({ ...rest, socket }));
     // socket.on("validate-roomId", (r) => validateRoom(socket, r));
