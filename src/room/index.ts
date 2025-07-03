@@ -1,5 +1,6 @@
 import { Server, Socket } from "socket.io";
 import createRoom from "./room/createRoom.js";
+import addMessage from "./room/addMessage.js";
 
 export interface RoomParams {
   roomId: string;
@@ -14,6 +15,7 @@ export interface IMessage {
 
 const RoomHandler = async (socket: Socket, io: Server) => {
   socket.on("create-room", (id) => createRoom(socket, id));
+  socket.on("send-message", (r, id) => addMessage(socket, r));
   // socket.on("join-room", (rest) => joinRoom({ ...rest, socket }));
   // socket.on("send-message", (rest) => addMessage({ ...rest, socket }));
   // socket.on("validate-roomId", (r) => validateRoom(socket, r));
