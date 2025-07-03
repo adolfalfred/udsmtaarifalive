@@ -2,7 +2,7 @@ import createRoom from "./room/createRoom.js";
 import addMessage from "./room/addMessage.js";
 const RoomHandler = async (socket, io) => {
     socket.on("create-room", (id) => createRoom(socket, id));
-    socket.on("send-message", (r, id) => addMessage(socket, r));
+    socket.on("send-message", (r, u, n, m) => addMessage(socket, r, u, n, m));
     // socket.on("join-room", (rest) => joinRoom({ ...rest, socket }));
     // socket.on("send-message", (rest) => addMessage({ ...rest, socket }));
     // socket.on("validate-roomId", (r) => validateRoom(socket, r));
